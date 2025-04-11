@@ -1,0 +1,10 @@
+{
+    "name": "cu-boulder/ckeditor5_icons",
+    "description": "Search for and insert Font Awesome icons without leaving the editor.",
+    "license": "GPL-2.0-or-later",
+    "type": "drupal-module",
+    "minimum-stability": "dev",
+    "require": {
+        "drupal/core": "^9.5 || ^10 || ^11"
+    }
+}

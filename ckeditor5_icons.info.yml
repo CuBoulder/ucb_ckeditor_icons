@@ -1,0 +1,6 @@
+name: CKEditor 5 Icons
+type: module
+description: 'Search for and insert Font Awesome icons without leaving the editor.'
+core_version_requirement: ^9.5 || ^10 || ^11
+dependencies:
+  - drupal:ckeditor5
