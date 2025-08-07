@@ -4,8 +4,14 @@
 
 import type { FontAwesomeVersion, FontAwesomeStyle, SelectableOption, CategoryDefinitions, IconName, IconDefinition, IconDefinitionAlt } from './icontypes';
 import type { ToolbarConfigItem } from 'ckeditor5/src/core';
-import { icons } from 'ckeditor5/src/core';
 import objectSizeExtraSmall from '../../../icons/object-size-extra-small.svg';
+import objectSizeSmall from '../../../icons/object-size-small.svg';
+import objectSizeMedium from '../../../icons/object-size-medium.svg';
+import objectSizeLarge from '../../../icons/object-size-large.svg';
+import objectSizeFull from '../../../icons/object-size-full.svg';
+import objectCenter from '../../../icons/object-center.svg';
+import objectLeft from '../../../icons/object-left.svg';
+import objectRight from '../../../icons/object-right.svg';
 
 /**
  * The options available in `editor.config.get('icon')`.
@@ -36,21 +42,21 @@ export const sizeOptions: { [key in Size]: SelectableOption; } = {
   },
   small: {
     label: 'Small',
-    icon: icons.objectSizeSmall,
+    icon: objectSizeSmall,
     className: 'fa-sm'
   },
   regular: {
     label: 'Regular',
-    icon: icons.objectSizeMedium
+    icon: objectSizeMedium
   },
   large: {
     label: 'Large',
-    icon: icons.objectSizeLarge,
+    icon: objectSizeLarge,
     className: 'fa-lg'
   },
   extraLarge: {
     label: 'Extra Large',
-    icon: icons.objectSizeFull,
+    icon: objectSizeFull,
     className: 'fa-xl',
     compatibility: ['6']
   },
@@ -100,16 +106,16 @@ export type AlignmentAttributeDefinition = ModelAttributeDefinition<Alignment, '
 export const alignmentOptions: { [key in Alignment]: SelectableOption; } = {
   none: {
     label: 'With text',
-    icon: icons.objectCenter
+    icon: objectCenter
   },
   left: {
     label: 'Pull left',
-    icon: icons.objectLeft,
+    icon: objectLeft,
     className: 'fa-pull-left'
   },
   right: {
     label: 'Pull right',
-    icon: icons.objectRight,
+    icon: objectRight,
     className: 'fa-pull-right'
   }
 };
