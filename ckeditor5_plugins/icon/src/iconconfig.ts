@@ -3,6 +3,7 @@
  */
 
 import type { FontAwesomeVersion, FontAwesomeStyle, SelectableOption, CategoryDefinitions, IconName, IconDefinition, IconDefinitionAlt } from './icontypes';
+import type { ToolbarConfigItem } from 'ckeditor5/src/core';
 import objectSizeExtraSmall from '../../../icons/object-size-extra-small.svg';
 import objectSizeSmall from '../../../icons/object-size-small.svg';
 import objectSizeMedium from '../../../icons/object-size-medium.svg';
@@ -16,11 +17,11 @@ import objectRight from '../../../icons/object-right.svg';
  * The options available in `editor.config.get('icon')`.
  */
 export interface IconConfig {
-  toolbarItems: string[];
+  toolbarItems: ToolbarConfigItem[];
   faVersion: FontAwesomeVersion;
   faCategories?: CategoryDefinitions;
   faStyles?: FontAwesomeStyle[];
-  faIcons?: { [key: string]: IconDefinition | IconDefinitionAlt };
+  faIcons?: Record<IconName, IconDefinition | IconDefinitionAlt>;
   recommendedIcons?: IconName[] | null;
   customMetadata?: boolean;
   asyncMetadataURI: string;
@@ -136,7 +137,7 @@ export const faStyleLabels: { [key in FontAwesomeStyle]: string; } = {
   custom: 'Custom'
 };
 
-export const styleDefault = 'solid' as FontAwesomeStyle;
+export const styleDefault = Object.keys(faStyleLabels)[0] as FontAwesomeStyle;
 
 /**
  * A definition of Font Awesome style classes by version.

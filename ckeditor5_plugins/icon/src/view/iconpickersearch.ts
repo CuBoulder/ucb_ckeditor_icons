@@ -1,10 +1,10 @@
 import type { InputViewInputEvent } from '@ckeditor/ckeditor5-ui/src/input/inputview';
 import type { Locale } from 'ckeditor5/src/utils';
 import type { ButtonView, InputTextView, ButtonExecuteEvent } from 'ckeditor5/src/ui';
-import { icons } from 'ckeditor5/src/core';
 import { createLabeledInputText, LabeledFieldView, View } from 'ckeditor5/src/ui';
 import HideableView from './hideableview';
 import { createButton } from './viewutils';
+import cancel from '../../../../icons/cancel.svg';
 
 // cSpell:ignore inputview
 
@@ -45,7 +45,7 @@ export default class IconPickerSearch extends View<HTMLFormElement> {
     this.searchFieldView.fieldView.on<InputViewInputEvent>('input', () =>
       this._search(true, this.searchFieldView.fieldView.element?.value));
 
-    this.clearButtonView = createButton(locale, t('Clear search'), icons.cancel, 'ck-button-cancel');
+    this.clearButtonView = createButton(locale, t('Clear search'), cancel, 'ck-button-cancel');
     this.clearButtonView.isVisible = false;
     this.clearButtonView.on<ButtonExecuteEvent>('execute', () => {
       this._search(false);
