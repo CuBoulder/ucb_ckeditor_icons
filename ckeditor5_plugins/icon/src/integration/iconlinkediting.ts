@@ -27,5 +27,14 @@ export default class IconLinkEditing extends Plugin implements PluginInterface {
     editor.model.schema.extend('icon', {
       allowAttributes: ['linkHref']
     });
+
+    // Linkit stores `data-entity-*` link attributes as separate model
+    // attributes. If the icon lacks them, its link can't merge with the link
+    // on the adjacent text and the link gets split into two `<a>` elements.
+    if (editor.plugins.has('LinkitEditing')) {
+      editor.model.schema.extend('icon', {
+        allowAttributes: ['linkDataEntityType', 'linkDataEntityUuid', 'linkDataEntitySubstitution']
+      });
+    }
   }
 }
