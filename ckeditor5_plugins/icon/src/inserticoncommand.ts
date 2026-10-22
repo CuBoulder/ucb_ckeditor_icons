@@ -21,11 +21,12 @@ export default class InsertIconCommand extends Command {
     model.change((writer) => {
       // Insert <icon></icon> at the current selection position
       // in a way that will result in creating a valid model structure.
-      let linkHref: string | undefined;
+      const iconElement = writer.createElement('icon', { iconFA, iconStyle });
       const linkElement = this._getSelectedLinkElement();
-      if (linkElement)
-        linkHref = linkElement.getAttribute('href');
-      const iconElement = writer.createElement('icon', linkHref ? { linkHref, iconFA, iconStyle } : { iconFA, iconStyle });
+      const linkHref = linkElement?.getAttribute('href');
+      if (linkHref) {
+        writer.setAttributes(this._getLinkAttributes(iconElement, linkHref), iconElement);
+      }
       model.insertContent(iconElement);
       editing.view.focus();
       writer.setSelection(iconElement, 'on');
@@ -47,6 +48,34 @@ export default class InsertIconCommand extends Command {
     // If the cursor is not in a location where a icon can be added, return
     // null so the addition doesn't happen.
     this.isEnabled = allowedIn !== null;
+  }
+
+  /**
+   * Gets the model link attributes (e.g. `linkHref` and those added by other
+   * plugins such as Linkit) of the link at the selection which can be applied
+   * to the icon.
+   *
+   * @param iconElement
+   *   The icon element the attributes will be applied to.
+   * @param linkHref
+   *   The `href` of the selected link.
+   * @returns
+   *   The link attributes keyed by attribute name.
+   */
+  private _getLinkAttributes(iconElement: Element, linkHref: string): Record<string, unknown> {
+    const { schema, document: { selection } } = this.editor.model;
+    const position = selection.getFirstPosition()!;
+    const source = [selection, position.textNode, position.nodeBefore, position.nodeAfter]
+      .find(item => item?.getAttribute('linkHref') === linkHref);
+    const attributes: Record<string, unknown> = { linkHref };
+    if (source) {
+      for (const [key, value] of source.getAttributes()) {
+        if (key.startsWith('link') && schema.checkAttribute(iconElement, key)) {
+          attributes[key] = value;
+        }
+      }
+    }
+    return attributes;
   }
 
   /**
